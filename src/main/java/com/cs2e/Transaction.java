@@ -30,7 +30,7 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     public String toString() {
-        return String.format("%s:%s:%s:%s:%s", type, to, from, amount, dateFormat.format(date));
+        return String.format("%s|%s|%s|%s|%s", type, to, from, amount, dateFormat.format(date));
     }
 
     @Override

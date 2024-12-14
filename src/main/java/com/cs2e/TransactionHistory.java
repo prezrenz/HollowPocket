@@ -1,11 +1,15 @@
 package com.cs2e;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 
 public class TransactionHistory extends JFrame {
 
     App mainApp;
+    DefaultTableModel model;
+    JTable table;
 
     public TransactionHistory(App parent) {
 
@@ -77,6 +81,19 @@ public class TransactionHistory extends JFrame {
         Send_Pnl.setBackground(new Color(217, 234, 253));
         Send_Pnl.setBounds(25,140,400,400);
         add(Send_Pnl);
+        
+        model = new DefaultTableModel();
+        table = new JTable(model);
+        model.addColumn("Type");
+        model.addColumn("To");
+        model.addColumn("From");
+        model.addColumn("Amount");
+        model.addColumn("Date");
+
+        JScrollPane tablePanel = new JScrollPane(table);
+        tablePanel.setBackground(new Color(217, 234, 253));
+        tablePanel.setBounds(25, 210, 400, 330);
+        add(tablePanel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
