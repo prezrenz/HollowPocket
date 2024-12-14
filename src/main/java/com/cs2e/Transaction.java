@@ -12,7 +12,7 @@ public class Transaction implements Comparable<Transaction> {
     float amount;
     Date date;
 
-    String datePattern = "dd/MM/yyyy";
+    String datePattern = "dd/MM/yyyy hh:mm:ss";
     DateFormat dateFormat = new SimpleDateFormat(datePattern);
 
     Transaction(String type, String to, String from, float amount, Date date)

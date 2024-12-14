@@ -65,7 +65,7 @@ public class User {
 
     Transaction stringToTransaction(String data) {
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
         String[] split = data.split(":");
         String type = split[0];
