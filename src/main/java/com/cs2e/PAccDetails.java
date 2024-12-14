@@ -157,7 +157,14 @@ public class PAccDetails extends JFrame {
         repaint();
         add(imageLabel);
 
+        Lock_btn.addActionListener((ae) -> Back());
+
+        
     }
+
+    private void Back(){
+            mainApp.setFrame(App.FRAME.DASHBOARD);
+        }
 
     private static Image makeCircularImage(Image image, int diameter) {
         // Create a buffered image with transparency
@@ -176,9 +183,6 @@ public class PAccDetails extends JFrame {
         g2.dispose();
 
         return circularImage;
-
-
-
     }
 
 }

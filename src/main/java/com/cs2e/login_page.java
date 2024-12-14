@@ -7,6 +7,7 @@ public class login_page extends JFrame {
 
     App mainApp;
 
+    @SuppressWarnings("unused")
     public login_page (App parent) {
         mainApp = parent;
 
@@ -114,7 +115,16 @@ public class login_page extends JFrame {
         register_Btn.setFocusable(false);
         add(register_Btn);
 
+        login_Btn.addActionListener((ae) -> login());
+        register_Btn.addActionListener((ae) -> register());
+    }
 
+    private void login() {
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+    }
+    
+    private void register() {
+        mainApp.setFrame(App.FRAME.REGISTER);
     }
 
 }

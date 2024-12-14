@@ -172,7 +172,10 @@ public class SendingPage extends JFrame {
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
-    }
+        Confirm_btn.addActionListener((ae) -> Confirm());
+        Cancel_btn.addActionListener((ae) -> Cancel());
+
+    } // good
 
     private static Image makeCircularImage(Image image, int diameter) {
         // Create a buffered image with transparency
@@ -194,5 +197,12 @@ public class SendingPage extends JFrame {
 
 
     }
+ 
+    private void Confirm(){
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+    }
 
+    private void Cancel(){
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+    } 
 }

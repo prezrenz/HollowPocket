@@ -15,13 +15,14 @@ public class Hashmap<T> {
     private int count;
     public T[] items;
 
-
+    @SuppressWarnings("unchecked")
     Hashmap() {
         size = 10;
         count = 0;
         items = (T[]) new Object[size];
     }
 
+    @SuppressWarnings("unchecked")
     Hashmap(int size) {
         this.size = size;
         count = 0;
@@ -43,6 +44,11 @@ public class Hashmap<T> {
         
     }
 */
+
+    public int getHash(String key) {
+        return hash(key);
+    }
+
     private int hash(String key) {
         return extract(key) % size;
     }

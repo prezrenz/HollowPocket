@@ -41,6 +41,7 @@ public class App {
         frames[currentFrame.ordinal()].setVisible(false);
         frames[newFrame.ordinal()].setVisible(true);
         currentFrame = newFrame;
+        frames[currentFrame.ordinal()].toFront();
     }
 
     public static void main(String[] args) {

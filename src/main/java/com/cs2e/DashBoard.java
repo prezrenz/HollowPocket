@@ -181,6 +181,12 @@ public class DashBoard extends JFrame {
         wht_divider2.setBackground(new Color(217, 234, 253));
         wht_divider2.setBounds(0,650,800,10);
         add(wht_divider2);
+
+        Lock_btn.addActionListener((ae) -> lock()); 
+        send_Btn.addActionListener((ae) -> sendingPage());  
+        receive_Btn.addActionListener((ae) -> receivingPage());
+        create_Btn.addActionListener((ae) -> accDetails());
+        tranHstry_Btn.addActionListener((ae) -> transactionHistory());
     }
 
     private static Image makeCircularImage(Image image, int diameter) {
@@ -200,7 +206,25 @@ public class DashBoard extends JFrame {
         g2.dispose();
 
         return circularImage;
-
+    }
+    
+    private void lock() {
+        mainApp.setFrame(App.FRAME.LOGIN);
     }
 
+    private void sendingPage() {
+        mainApp.setFrame(App.FRAME.SENDING);
+    }
+
+    private void receivingPage(){
+        mainApp.setFrame(App.FRAME.RECEIVING);
+    }
+
+    private void accDetails(){
+        mainApp.setFrame(App.FRAME.DETAILS);
+    }
+
+    private void transactionHistory(){
+        mainApp.setFrame(App.FRAME.TRANSACTION);
+    }
 }

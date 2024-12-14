@@ -7,6 +7,7 @@ public class registration_page extends JFrame {
 
     App mainApp;
 
+    @SuppressWarnings("unused")
     public registration_page (App parent) {
 
         mainApp = parent;
@@ -171,7 +172,15 @@ public class registration_page extends JFrame {
         cancel_Btn.setBorder(BorderFactory.createLineBorder(new Color(169, 169, 169), 1));
         cancel_Btn.setFocusable(false);
         add(cancel_Btn);
-
+        
+        cancel_Btn.addActionListener((ae) -> login());
+        register_btn.addActionListener((ae) -> DashBoard());
     }
-
+    private void login(){
+        mainApp.setFrame(App.FRAME.LOGIN);
+    }
+    
+    private void DashBoard(){
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+    }
 }

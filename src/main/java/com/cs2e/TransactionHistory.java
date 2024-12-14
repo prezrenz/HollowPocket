@@ -87,6 +87,10 @@ public class TransactionHistory extends JFrame {
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
-    }
+        Back_btn.addActionListener((ae) -> Back());
 
+    }   
+    private void Back(){
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+    }
 }

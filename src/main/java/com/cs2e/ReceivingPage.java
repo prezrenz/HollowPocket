@@ -94,8 +94,10 @@ public class ReceivingPage extends JFrame {
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
+        Back_btn.addActionListener((ae) -> Back());
     }
 
+    
     private static Image makeCircularImage(Image image, int diameter) {
         // Create a buffered image with transparency
         BufferedImage circularImage = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
@@ -113,8 +115,10 @@ public class ReceivingPage extends JFrame {
         g2.dispose();
 
         return circularImage;
-
-
     }
+
+    private void Back(){
+        mainApp.setFrame(App.FRAME.DASHBOARD);
+   }
 
 }
