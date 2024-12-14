@@ -29,7 +29,7 @@ public class Hashmap<T> {
     public void insert(T object, String key) {
 
     }
-
+/*
     public T search(String key) {
 
     }
@@ -57,5 +57,5 @@ public class Hashmap<T> {
     private int extract(String key) {
 
     }
-
+*/
 }
