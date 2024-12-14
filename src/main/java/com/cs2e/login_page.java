@@ -6,6 +6,8 @@ import java.awt.*;
 public class login_page extends JFrame {
 
     App mainApp;
+    JTextField textField;
+    JPasswordField passwordField;
 
     @SuppressWarnings("unused")
     public login_page (App parent) {
@@ -69,7 +71,7 @@ public class login_page extends JFrame {
         add(imageLabel1);
 
         // User Login text field
-        JTextField textField = new JTextField();
+        textField = new JTextField();
         textField.setBounds(100, 250, 250, 30);
         textField.setSize(250,30);
         textField.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -79,7 +81,7 @@ public class login_page extends JFrame {
 
 
         // Password text field
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         passwordField.setBounds(100, 400, 250, 30);
         passwordField.setFont(new Font("Arial", Font.PLAIN, 16)); // Optional: set font
         passwordField.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -119,8 +121,24 @@ public class login_page extends JFrame {
         register_Btn.addActionListener((ae) -> register());
     }
 
+    private void clearFields() {
+        textField.setText("");
+        passwordField.setText("");
+    }
+
     private void login() {
-        mainApp.setFrame(App.FRAME.DASHBOARD);
+        try {    
+            String username = textField.getText();
+            String password = passwordField.getText();
+
+            User loginUser = mainApp.database.login(username, password);
+            mainApp.currentUser = loginUser;
+
+            clearFields();
+            mainApp.setFrame(App.FRAME.DASHBOARD);
+        } catch (Database.DatabaseError e) {
+            JOptionPane.showMessageDialog(this, e.getMsg(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void register() {

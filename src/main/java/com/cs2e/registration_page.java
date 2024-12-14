@@ -6,6 +6,10 @@ import java.awt.*;
 public class registration_page extends JFrame {
 
     App mainApp;
+    JTextField user_text_field;
+    JPasswordField passwordField;
+    JTextField countryField;
+    JTextField PNumberTextField;
 
     @SuppressWarnings("unused")
     public registration_page (App parent) {
@@ -110,7 +114,7 @@ public class registration_page extends JFrame {
         add(imageLabel1);
 
         //Username text field
-        JTextField user_text_field = new JTextField();
+        user_text_field = new JTextField();
         user_text_field.setBounds(100, 170, 250, 30);
         user_text_field.setSize(250,30);
         user_text_field.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -119,7 +123,7 @@ public class registration_page extends JFrame {
         add(user_text_field);
 
         //Confirm Username text field
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         passwordField.setBounds(100, 250, 250, 30);
         passwordField.setSize(250,30);
         passwordField.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -131,7 +135,7 @@ public class registration_page extends JFrame {
 
 
         //Country text field
-        JTextField countryField = new JTextField();
+        countryField = new JTextField();
         countryField.setBounds(100, 500, 250, 30);
         countryField.setFont(new Font("Arial", Font.PLAIN, 13)); // Optional: set font
         countryField.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -140,7 +144,7 @@ public class registration_page extends JFrame {
         add(countryField);
 
         //Number Password text field
-        JTextField PNumberTextField = new JTextField();
+        PNumberTextField = new JTextField();
         PNumberTextField.setBounds(100, 400, 250, 30);
         PNumberTextField.setFont(new Font("Arial", Font.PLAIN, 13)); // Optional: set font
         PNumberTextField.setBackground(new Color(217, 234, 253)); // Custom background color
@@ -173,14 +177,39 @@ public class registration_page extends JFrame {
         cancel_Btn.setFocusable(false);
         add(cancel_Btn);
         
-        cancel_Btn.addActionListener((ae) -> login());
-        register_btn.addActionListener((ae) -> DashBoard());
+        cancel_Btn.addActionListener((ae) -> cancel());
+        register_btn.addActionListener((ae) -> register());
     }
-    private void login(){
+
+    private void clearFields() {
+        user_text_field.setText("");
+        passwordField.setText("");
+        countryField.setText("");
+        PNumberTextField.setText("");
+    }
+
+    private void cancel(){
         mainApp.setFrame(App.FRAME.LOGIN);
     }
     
-    private void DashBoard(){
-        mainApp.setFrame(App.FRAME.DASHBOARD);
+    private void register(){ 
+        try {
+            String name = user_text_field.getText();
+            String pass = passwordField.getText();
+            String country = countryField.getText();
+            String numb = PNumberTextField.getText();
+
+            if(name.isEmpty() || pass.isEmpty() || country.isEmpty() || numb.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            mainApp.database.newUser(name, pass, country, numb);
+            JOptionPane.showMessageDialog(this, "Successfully registered user!");
+            clearFields();
+            mainApp.setFrame(App.FRAME.DASHBOARD);
+        } catch(Database.DatabaseError e) {
+            JOptionPane.showMessageDialog(this, e.getMsg(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

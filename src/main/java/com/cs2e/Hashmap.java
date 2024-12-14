@@ -7,26 +7,26 @@ package com.cs2e;
  *  and linear probing collision resolution
  *
 */
-
+import java.lang.reflect.Array;
 
 public class Hashmap<T> {
 
-    private int size;
-    private int count;
+    public int size;
+    public int count;
     public T[] items;
 
     @SuppressWarnings("unchecked")
-    Hashmap() {
+    Hashmap(Class<T> clazz) {
         size = 10;
         count = 0;
-        items = (T[]) new Object[size];
+        items = (T[]) Array.newInstance(clazz, size);
     }
 
     @SuppressWarnings("unchecked")
-    Hashmap(int size) {
+    Hashmap(Class<T> clazz, int size) {
         this.size = size;
         count = 0;
-        items = (T[]) new Object[this.size];
+        items = (T[]) Array.newInstance(clazz, this.size);
     }
 
     public void insert(String key, T object) {
@@ -68,7 +68,7 @@ public class Hashmap<T> {
     public void print() {
         for(int i = 0; i < size; i++) {
             if(items[i] != null) {
-                System.out.println(items[i].toString());
+                System.out.println("Index: " + items[i].toString());
             }
         }
     }

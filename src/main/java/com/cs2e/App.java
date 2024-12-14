@@ -24,6 +24,9 @@ public class App {
     SendingPage sendingPage;
     ReceivingPage receivingPage;
     TransactionHistory transactionHistory;
+    User currentUser;
+
+    Database database;
 
     App() {
         frames[FRAME.DASHBOARD.ordinal()] = new DashBoard(this);
@@ -35,6 +38,10 @@ public class App {
         frames[FRAME.TRANSACTION.ordinal()] = new TransactionHistory(this);
     
         setFrame(FRAME.LOGIN);
+
+        database = new Database();
+        currentUser = null;
+    
     }
 
     void setFrame(FRAME newFrame) {
@@ -47,9 +54,5 @@ public class App {
     public static void main(String[] args) {
         new App();
 
-        Hashmap<Integer> t = new Hashmap<Integer>();
-        System.out.println("Inserting 1");
-        t.insert("123456", 1);
-        t.print();
     }
 }

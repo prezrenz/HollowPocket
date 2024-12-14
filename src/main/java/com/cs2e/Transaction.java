@@ -1,15 +1,21 @@
 package com.cs2e;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
+
+public class Transaction implements Comparable<Transaction> {
     String type;
     String to;
     String from;
-    String amount;
+    float amount;
     Date date;
 
-    Transaction(String type, String to, String from, String amount, Date date)
+    String datePattern = "dd/MM/yyyy";
+    DateFormat dateFormat = new SimpleDateFormat(datePattern);
+
+    Transaction(String type, String to, String from, float amount, Date date)
     {
         this.type = type;
         this.to = to;
@@ -24,7 +30,12 @@ public class Transaction {
     }
 
     public String toString() {
-        return String.format("%s:%s:%s:%s:%s", type, to, from, amount, date.toString());
+        return String.format("%s:%s:%s:%s:%s", type, to, from, amount, dateFormat.format(date));
+    }
+
+    @Override
+    public int compareTo(Transaction t) {
+        return date.compareTo(t.date);
     }
 
 }
