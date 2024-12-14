@@ -7,7 +7,11 @@ import java.awt.image.BufferedImage;
 
 public class ReceivingPage extends JFrame {
 
-    public ReceivingPage() {
+    App mainApp;
+
+    public ReceivingPage(App parent) {
+
+        mainApp = parent;
 
         final int APP_WIDTH = 470;
         final int APP_HEIGHT = 700;

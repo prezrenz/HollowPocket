@@ -5,7 +5,11 @@ import java.awt.*;
 
 public class registration_page extends JFrame {
 
-    public registration_page () {
+    App mainApp;
+
+    public registration_page (App parent) {
+
+        mainApp = parent;
 
         final int APP_WIDTH = 470;
         final int APP_HEIGHT = 700;
@@ -18,7 +22,6 @@ public class registration_page extends JFrame {
         setLayout(null);
         setSize(APP_WIDTH, APP_HEIGHT);
         setLocationRelativeTo(null);
-        setVisible(true);
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 

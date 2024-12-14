@@ -1,55 +1,49 @@
 package com.cs2e;
 
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JPanel;
 import javax.swing.JFrame;
 
-public class App extends JFrame {
-    
-    JPanel mainPanel;
-    CardLayout cardLayout;
+public class App {
+
+    public enum FRAME {
+        DASHBOARD,
+        LOGIN,
+        REGISTER,
+        DETAILS,
+        SENDING,
+        RECEIVING,
+        TRANSACTION
+    }
+
+    FRAME currentFrame = FRAME.DASHBOARD;
+    JFrame[] frames = new JFrame[7];
 
     DashBoard dashboard;
     login_page loginPage;
+    registration_page registrationPage;
     PAccDetails accDetails;
     SendingPage sendingPage;
     ReceivingPage receivingPage;
     TransactionHistory transactionHistory;
 
     App() {
+        frames[FRAME.DASHBOARD.ordinal()] = new DashBoard(this);
+        frames[FRAME.LOGIN.ordinal()] = new login_page(this);
+        frames[FRAME.REGISTER.ordinal()] = new registration_page(this);
+        frames[FRAME.DETAILS.ordinal()] = new PAccDetails(this);
+        frames[FRAME.SENDING.ordinal()] = new SendingPage(this);
+        frames[FRAME.RECEIVING.ordinal()] = new ReceivingPage(this);
+        frames[FRAME.TRANSACTION.ordinal()] = new TransactionHistory(this);
+    
+        setFrame(FRAME.LOGIN);
+    }
 
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel();
-        mainPanel.setLayout(cardLayout);
-        add(mainPanel);
-
-        dashboard = new DashBoard();
-        loginPage = new login_page();
-        accDetails = new PAccDetails();
-        sendingPage = new SendingPage();
-        receivingPage = new ReceivingPage();
-        transactionHistory = new TransactionHistory();
-
-        mainPanel.add(dashboard, "Dashboard");
-        mainPanel.add(loginPage, "Login");
-        mainPanel.add(accDetails, "Details");
-        mainPanel.add(sendingPage, "Sending");
-        mainPanel.add(receivingPage, "Receiving");
-        mainPanel.add(transactionHistory, "Transaction");
-
-        cardLayout.show(mainPanel, "Login");
-
-        setLayout(new FlowLayout());
-        setLocationRelativeTo(null);
-        setVisible(true);
-
+    void setFrame(FRAME newFrame) {
+        frames[currentFrame.ordinal()].setVisible(false);
+        frames[newFrame.ordinal()].setVisible(true);
+        currentFrame = newFrame;
     }
 
     public static void main(String[] args) {
-    
         new App();
-
     }
 }

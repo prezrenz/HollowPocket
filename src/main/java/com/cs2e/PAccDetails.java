@@ -5,9 +5,12 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
-public class PAccDetails extends JPanel {
+public class PAccDetails extends JFrame {
 
-    public PAccDetails () {
+    App mainApp;
+
+    public PAccDetails (App parent) {
+        mainApp = parent;
 
         final int APP_WIDTH = 470;
         final int APP_HEIGHT = 700;
@@ -19,7 +22,6 @@ public class PAccDetails extends JPanel {
         setLayout(null);
         setSize(APP_WIDTH, APP_HEIGHT);
         setLocationRelativeTo(null);
-        setVisible(true);
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 

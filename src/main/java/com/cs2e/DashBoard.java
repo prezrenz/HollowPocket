@@ -7,7 +7,11 @@ import java.awt.image.BufferedImage;
 
 public class DashBoard extends JFrame {
 
-    public DashBoard() {
+    App mainApp;
+
+    public DashBoard(App parent) {
+        mainApp = parent;
+
         final int APP_WIDTH = 800;
         final int APP_HEIGHT = 800;
 
@@ -97,7 +101,6 @@ public class DashBoard extends JFrame {
         setLayout(null);
         setSize(APP_WIDTH, APP_HEIGHT);
         setLocationRelativeTo(null);
-        setVisible(true);
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
