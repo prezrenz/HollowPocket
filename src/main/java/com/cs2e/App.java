@@ -45,5 +45,10 @@ public class App {
 
     public static void main(String[] args) {
         new App();
+
+        Hashmap<Integer> t = new Hashmap<Integer>();
+        System.out.println("Inserting 1");
+        t.insert("123456", 1);
+        t.print();
     }
 }

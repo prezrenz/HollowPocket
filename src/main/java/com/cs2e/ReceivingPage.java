@@ -91,7 +91,6 @@ public class ReceivingPage extends JFrame {
         setLayout(null);
         setSize(APP_WIDTH, APP_HEIGHT);
         setLocationRelativeTo(null);
-        setVisible(true);
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
