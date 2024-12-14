@@ -29,17 +29,25 @@ public class App {
     Database database;
 
     App() {
-        frames[FRAME.DASHBOARD.ordinal()] = new DashBoard(this);
-        frames[FRAME.LOGIN.ordinal()] = new login_page(this);
-        frames[FRAME.REGISTER.ordinal()] = new registration_page(this);
-        frames[FRAME.DETAILS.ordinal()] = new PAccDetails(this);
-        frames[FRAME.SENDING.ordinal()] = new SendingPage(this);
-        frames[FRAME.RECEIVING.ordinal()] = new ReceivingPage(this);
-        frames[FRAME.TRANSACTION.ordinal()] = new TransactionHistory(this);
-    
+        dashboard = new DashBoard(this);
+        loginPage = new login_page(this);
+        registrationPage = new registration_page(this);
+        accDetails = new PAccDetails(this);
+        sendingPage = new SendingPage(this);
+        receivingPage = new ReceivingPage(this);
+        transactionHistory = new TransactionHistory(this);
+        
+        frames[FRAME.DASHBOARD.ordinal()] = dashboard;
+        frames[FRAME.LOGIN.ordinal()] = loginPage;
+        frames[FRAME.REGISTER.ordinal()] = registrationPage;
+        frames[FRAME.DETAILS.ordinal()] = accDetails;
+        frames[FRAME.SENDING.ordinal()] = sendingPage;
+        frames[FRAME.RECEIVING.ordinal()] = receivingPage;
+        frames[FRAME.TRANSACTION.ordinal()] = transactionHistory;
+   
         setFrame(FRAME.LOGIN);
 
-        database = new Database();
+        database = new Database(this);
         currentUser = null;
     
     }

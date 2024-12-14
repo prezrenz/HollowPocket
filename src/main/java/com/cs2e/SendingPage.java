@@ -8,6 +8,10 @@ import java.awt.image.BufferedImage;
 public class SendingPage extends JFrame {
 
     App mainApp;
+    JTextField textField;
+    JTextField textField1;
+    JTextField textField2;
+    JTextField textField3;
 
     public SendingPage(App parent) {
 
@@ -69,7 +73,7 @@ public class SendingPage extends JFrame {
         add(CAmount);
 
         //Account ID text Field
-        JTextField textField = new JTextField();
+        textField = new JTextField();
         textField.setBounds(80, 180, 250, 30);
         textField.setSize(250,30);
         textField.setBackground(new Color(129, 116, 160)); // Custom background color
@@ -78,7 +82,7 @@ public class SendingPage extends JFrame {
         add(textField);
 
         //Country Text Field
-        JTextField textField1 = new JTextField();
+        textField1 = new JTextField();
         textField1.setBounds(80, 270, 250, 30);
         textField1.setSize(250,30);
         textField1.setBackground(new Color(129, 116, 160)); // Custom background color
@@ -87,7 +91,7 @@ public class SendingPage extends JFrame {
         add(textField1);
 
         //Phone Number Text Field
-        JTextField textField2 = new JTextField();
+        textField2 = new JTextField();
         textField2.setBounds(80, 450, 250, 30);
         textField2.setSize(250,30);
         textField2.setBackground(new Color(129, 116, 160)); // Custom background color
@@ -96,7 +100,7 @@ public class SendingPage extends JFrame {
         add(textField2);
 
         //Cash Amount Text Field
-        JTextField textField3 = new JTextField();
+        textField3 = new JTextField();
         textField3.setBounds(80, 360, 250, 30);
         textField3.setSize(250,30);
         textField3.setBackground(new Color(129, 116, 160)); // Custom background color
@@ -174,6 +178,7 @@ public class SendingPage extends JFrame {
 
         Confirm_btn.addActionListener((ae) -> Confirm());
         Cancel_btn.addActionListener((ae) -> Cancel());
+        Max_btn.addActionListener((ae) -> {textField2.setText(String.valueOf(mainApp.currentUser.balance));});
 
     } // good
 
@@ -195,14 +200,40 @@ public class SendingPage extends JFrame {
 
         return circularImage;
 
+    }
 
+    private void clearFields() {
+        textField.setText("");
+        textField1.setText("");
+        textField2.setText("");
+        textField3.setText("");
     }
  
     private void Confirm(){
-        mainApp.setFrame(App.FRAME.DASHBOARD);
+        try {
+            String id = textField.getText();
+            String country = textField1.getText();
+            String numb = textField3.getText();
+            String amount = textField2.getText();
+
+            if(id.isEmpty() || country.isEmpty() || numb.isEmpty() || amount.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Transaction Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            mainApp.database.transaction(mainApp.currentUser.accountId, id, Float.parseFloat(amount), country, numb);
+
+            mainApp.dashboard.setup();
+            clearFields();
+            mainApp.setFrame(App.FRAME.DASHBOARD);
+            JOptionPane.showMessageDialog(this, "Successfully sent to " + mainApp.database.findUser(id).username + "!");
+        } catch(Database.DatabaseError e) {
+            JOptionPane.showMessageDialog(this, e.getMsg(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void Cancel(){
+        clearFields();
         mainApp.setFrame(App.FRAME.DASHBOARD);
     } 
 }

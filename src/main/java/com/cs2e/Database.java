@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Date;
 
 public class Database {
 
@@ -23,7 +22,10 @@ public class Database {
     Hashmap<User> database;
     String databaseFileName = "users.dat";
 
-    Database() {
+    App mainApp;
+
+    Database(App parent) {
+        mainApp = parent;
         File databaseFile = new File(databaseFileName);
         database = new Hashmap<User>(User.class, 10);
 
@@ -138,6 +140,7 @@ public class Database {
 
         User newUser = new User(generateAccountId(), username, password, 500.00f, country, phoneNumber);
         database.insert(newUser.accountId, newUser);
+        mainApp.currentUser = newUser;
         
         usersToFile();
     }
@@ -173,7 +176,7 @@ public class Database {
             throw e;
         }
         
-        if(!country.equals(toUser.country) && !phoneNumber.equals(toUser.phoneNumber)) {
+        if(!country.equals(toUser.country) || !phoneNumber.equals(toUser.phoneNumber)) {
             throw new DatabaseError("Details mismatch, check the country and phone number again.");
         }
 
@@ -182,5 +185,7 @@ public class Database {
         
         fromUser.newTransaction("Send", toUser.username, fromUser.username, amount);
         toUser.newTransaction("Receive", toUser.username, fromUser.username, amount);
+
+        usersToFile();
     }
 }

@@ -205,6 +205,7 @@ public class registration_page extends JFrame {
             }
 
             mainApp.database.newUser(name, pass, country, numb);
+            mainApp.dashboard.setup();
             JOptionPane.showMessageDialog(this, "Successfully registered user!");
             clearFields();
             mainApp.setFrame(App.FRAME.DASHBOARD);

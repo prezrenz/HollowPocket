@@ -2,12 +2,15 @@ package com.cs2e;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 public class ReceivingPage extends JFrame {
 
     App mainApp;
+    JLabel AccId;
 
     public ReceivingPage(App parent) {
 
@@ -74,7 +77,15 @@ public class ReceivingPage extends JFrame {
         blck_divider.setBackground(Color.black);
         blck_divider.setBounds(120,340,210,1);
         add(blck_divider);
-
+        
+        AccId = new JLabel();
+        AccId.setLocation(185, 300);
+        AccId.setSize(300, 60);
+        AccId.setFont(new Font("Cooper Black", Font.PLAIN, 20));
+        AccId.setForeground(new Color(129, 116, 160));
+        AccId.setVisible(true);
+        add(AccId);
+        
         JPanel wht_divider = new JPanel();
         wht_divider.setBackground(new Color(217, 234, 253));
         wht_divider.setBounds(0,110,800,10);
@@ -94,6 +105,7 @@ public class ReceivingPage extends JFrame {
         Color backgroundColor = new Color(26, 26, 29);
         getContentPane().setBackground(backgroundColor);
 
+        Copy_btn.addActionListener((ae) -> copy());
         Back_btn.addActionListener((ae) -> Back());
     }
 
@@ -115,6 +127,17 @@ public class ReceivingPage extends JFrame {
         g2.dispose();
 
         return circularImage;
+    }
+
+    public void setup() {
+        AccId.setText(mainApp.currentUser.accountId);
+    }
+
+    private void copy() {
+        StringSelection selection = new StringSelection(AccId.getText());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, null);
+        JOptionPane.showMessageDialog(this, "Successfully copied Account ID!");
     }
 
     private void Back(){

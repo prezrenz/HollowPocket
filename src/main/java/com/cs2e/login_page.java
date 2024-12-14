@@ -134,6 +134,7 @@ public class login_page extends JFrame {
             User loginUser = mainApp.database.login(username, password);
             mainApp.currentUser = loginUser;
 
+            mainApp.dashboard.setup();
             clearFields();
             mainApp.setFrame(App.FRAME.DASHBOARD);
         } catch (Database.DatabaseError e) {

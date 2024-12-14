@@ -8,6 +8,12 @@ import java.awt.image.BufferedImage;
 public class PAccDetails extends JFrame {
 
     App mainApp;
+    JLabel AccID_label;
+    JLabel UserN_label;
+    JLabel Pass_label;
+    JLabel Country_label;
+    JLabel PNumber_label;
+    JLabel Balance_label;
 
     public PAccDetails (App parent) {
         mainApp = parent;
@@ -58,9 +64,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(Acc_label);
 
-        JLabel AccID_label = new JLabel("Account ID:");
+        AccID_label = new JLabel("Account ID:");
         AccID_label.setLocation(30,200);
-        AccID_label.setSize(215,50);
+        AccID_label.setSize(400,50);
         AccID_label.setFont(new Font("Cooper Black",Font.PLAIN,18));
         AccID_label.setForeground(new Color(129, 191, 218));
         AccID_label.setVisible(true);
@@ -69,9 +75,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(AccID_label);
 
-        JLabel UserN_label = new JLabel("Username:");
+        UserN_label = new JLabel("Username:");
         UserN_label.setLocation(30,260);
-        UserN_label.setSize(155,50);
+        UserN_label.setSize(400,50);
         UserN_label.setFont(new Font("Cooper Black",Font.PLAIN,15));
         UserN_label.setForeground(new Color(129, 191, 218));
         UserN_label.setVisible(true);
@@ -80,9 +86,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(UserN_label);
 
-        JLabel Pass_label = new JLabel("Password:");
+        Pass_label = new JLabel("Password:");
         Pass_label.setLocation(30,310);
-        Pass_label.setSize(155,50);
+        Pass_label.setSize(400,50);
         Pass_label.setFont(new Font("Cooper Black",Font.PLAIN,15));
         Pass_label.setForeground(new Color(129, 191, 218));
         Pass_label.setVisible(true);
@@ -91,9 +97,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(Pass_label);
 
-        JLabel Country_label = new JLabel("Country:");
+        Country_label = new JLabel("Country:");
         Country_label.setLocation(30,360);
-        Country_label.setSize(155,50);
+        Country_label.setSize(400,50);
         Country_label.setFont(new Font("Cooper Black",Font.PLAIN,15));
         Country_label.setForeground(new Color(129, 191, 218));
         Country_label.setVisible(true);
@@ -102,9 +108,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(Country_label);
 
-        JLabel PNumber_label = new JLabel("Phone Number:");
+        PNumber_label = new JLabel("Phone Number:");
         PNumber_label.setLocation(30,410);
-        PNumber_label.setSize(215,50);
+        PNumber_label.setSize(400,50);
         PNumber_label.setFont(new Font("Cooper Black",Font.PLAIN,15));
         PNumber_label.setForeground(new Color(129, 191, 218));
         PNumber_label.setVisible(true);
@@ -113,9 +119,9 @@ public class PAccDetails extends JFrame {
         repaint();
         add(PNumber_label);
 
-        JLabel Balance_label = new JLabel("Balance:");
+        Balance_label = new JLabel("Balance:");
         Balance_label.setLocation(30,460);
-        Balance_label.setSize(155,50);
+        Balance_label.setSize(400,50);
         Balance_label.setFont(new Font("Cooper Black",Font.PLAIN,15));
         Balance_label.setForeground(new Color(129, 191, 218));
         Balance_label.setVisible(true);
@@ -162,9 +168,18 @@ public class PAccDetails extends JFrame {
         
     }
 
+    public void setup() {
+        AccID_label.setText("Account ID: " + mainApp.currentUser.accountId);
+        UserN_label.setText("Username: " + mainApp.currentUser.username);
+        Pass_label.setText("Password: " + mainApp.currentUser.password);
+        Country_label.setText("Country: " + mainApp.currentUser.country);
+        PNumber_label.setText("Phone Number: " + mainApp.currentUser.phoneNumber);
+        Balance_label.setText("Balance: " + mainApp.currentUser.balance);
+    }
+
     private void Back(){
             mainApp.setFrame(App.FRAME.DASHBOARD);
-        }
+    }
 
     private static Image makeCircularImage(Image image, int diameter) {
         // Create a buffered image with transparency

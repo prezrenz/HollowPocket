@@ -125,5 +125,8 @@ public class User {
 
     public void subBalance(float amount) {
         balance -= amount;
+        if(balance < 0.0f){
+            balance = 0.0f;
+        }
     }
 }

@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 public class DashBoard extends JFrame {
 
     App mainApp;
+    JLabel AccName_label = new JLabel("User Account Name");
+    JLabel AccID_label = new JLabel("Account ID: ");
+    JLabel AccBalance = new JLabel("PHP : * * * * * * * * *");
 
     public DashBoard(App parent) {
         mainApp = parent;
@@ -122,7 +125,7 @@ public class DashBoard extends JFrame {
         Balance_label.setVisible(true);
         add(Balance_label);
 
-        JLabel AccName_label = new JLabel("User Account Name");
+        AccName_label = new JLabel("User Account Name");
         AccName_label.setLocation(120, 170);
         AccName_label.setSize(255, 60);
         AccName_label.setFont(new Font("Cooper Black", Font.PLAIN, 20));
@@ -130,7 +133,7 @@ public class DashBoard extends JFrame {
         AccName_label.setVisible(true);
         add(AccName_label);
 
-        JLabel AccID_label = new JLabel("Account ID: ");
+        AccID_label = new JLabel("Account ID: ");
         AccID_label.setLocation(120, 200);
         AccID_label.setSize(255, 60);
         AccID_label.setFont(new Font("Cooper Black", Font.PLAIN, 13));
@@ -138,7 +141,7 @@ public class DashBoard extends JFrame {
         AccID_label.setVisible(true);
         add(AccID_label);
 
-        JLabel AccBalance = new JLabel("PHP : * * * * * * * * *");
+        AccBalance = new JLabel("PHP : * * * * * * * * *");
         AccBalance.setLocation(480, 350);
         AccBalance.setSize(300, 60);
         AccBalance.setFont(new Font("Cooper Black", Font.PLAIN, 20));
@@ -182,9 +185,9 @@ public class DashBoard extends JFrame {
         wht_divider2.setBounds(0,650,800,10);
         add(wht_divider2);
 
-        Lock_btn.addActionListener((ae) -> lock()); 
-        send_Btn.addActionListener((ae) -> sendingPage());  
-        receive_Btn.addActionListener((ae) -> receivingPage());
+        Lock_btn.addActionListener((ae) -> logout()); 
+        send_Btn.addActionListener((ae) -> send());  
+        receive_Btn.addActionListener((ae) -> receive());
         create_Btn.addActionListener((ae) -> accDetails());
         tranHstry_Btn.addActionListener((ae) -> transactionHistory());
     }
@@ -207,20 +210,34 @@ public class DashBoard extends JFrame {
 
         return circularImage;
     }
+
+    public void setup() {
+        AccName_label.setText("Welcome, " + mainApp.currentUser.username + "!");
+        AccID_label.setText("Account ID: " + mainApp.currentUser.accountId);
+        AccBalance.setText("PHP: " + mainApp.currentUser.balance);
+    }
     
-    private void lock() {
+    private void logout() {
+        mainApp.currentUser = null;
         mainApp.setFrame(App.FRAME.LOGIN);
     }
 
-    private void sendingPage() {
+    private void send() {
+        if(mainApp.currentUser.balance <= 0.0f) {
+            JOptionPane.showMessageDialog(this, "Cannot send, you have 0.0 balance!");
+            return;
+        }
+
         mainApp.setFrame(App.FRAME.SENDING);
     }
 
-    private void receivingPage(){
+    private void receive(){
+        mainApp.receivingPage.setup();
         mainApp.setFrame(App.FRAME.RECEIVING);
     }
 
     private void accDetails(){
+        mainApp.accDetails.setup();
         mainApp.setFrame(App.FRAME.DETAILS);
     }
 
