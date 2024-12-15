@@ -11,6 +11,7 @@ public class TransactionHistory extends JFrame {
 
     App mainApp;
     DefaultTableModel model;
+    JScrollPane tablePanel;
     JTable table;
 
     public TransactionHistory(App parent) {
@@ -106,7 +107,7 @@ public class TransactionHistory extends JFrame {
         model.addColumn("Date");
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        JScrollPane tablePanel = new JScrollPane(table);
+        tablePanel = new JScrollPane(table);
         tablePanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         tablePanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         tablePanel.setBackground(new Color(217, 234, 253));
@@ -115,6 +116,7 @@ public class TransactionHistory extends JFrame {
         table.setFillsViewportHeight(true);
         table.setColumnSelectionAllowed(false);
         table.doLayout();
+        tablePanel.setViewportView(table);
         tablePanel.setVisible(true);
         table.setVisible(true);
         add(tablePanel);
@@ -143,6 +145,10 @@ public class TransactionHistory extends JFrame {
                 model.addRow(transactionHistory.get(i).tabularize());
             }
         }
+
+        tablePanel.setViewportView(table);
+        tablePanel.repaint();
+        table.repaint();
     }
 
     private void Back(){
