@@ -25,7 +25,7 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     Object[] tabularize() {
-        Object[] data = {type, to, from, amount, date};
+        Object[] data = {type, to, from, amount, dateFormat.format(date)};
         return data;
     }
 
@@ -35,7 +35,7 @@ public class Transaction implements Comparable<Transaction> {
 
     @Override
     public int compareTo(Transaction t) {
-        return date.compareTo(t.date);
+        return -1 * date.compareTo(t.date);
     }
 
 }

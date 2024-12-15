@@ -2,8 +2,10 @@ package com.cs2e;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TransactionHistory extends JFrame {
 
@@ -82,18 +84,42 @@ public class TransactionHistory extends JFrame {
         Send_Pnl.setBounds(25,140,400,400);
         add(Send_Pnl);
         
-        model = new DefaultTableModel();
-        table = new JTable(model);
+        model = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        table = new JTable(model) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
         model.addColumn("Type");
         model.addColumn("To");
         model.addColumn("From");
         model.addColumn("Amount");
         model.addColumn("Date");
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         JScrollPane tablePanel = new JScrollPane(table);
+        tablePanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tablePanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         tablePanel.setBackground(new Color(217, 234, 253));
-        tablePanel.setBounds(25, 210, 400, 330);
+        tablePanel.setBounds(25, 180, 400, 300);
+        tablePanel.setPreferredSize(new Dimension(400, 300));
+        table.setFillsViewportHeight(true);
+        table.setColumnSelectionAllowed(false);
+        table.doLayout();
+        tablePanel.setVisible(true);
+        table.setVisible(true);
         add(tablePanel);
+        tablePanel.repaint();
+        table.repaint();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -106,7 +132,19 @@ public class TransactionHistory extends JFrame {
 
         Back_btn.addActionListener((ae) -> Back());
 
-    }   
+    }
+
+    public void setup() {
+        model.setRowCount(0);
+
+        ArrayList<Transaction> transactionHistory = mainApp.currentUser.transactionHistory;
+        if(transactionHistory != null && !transactionHistory.isEmpty()) {
+            for(int i = 0; i < transactionHistory.size(); i++) {
+                model.addRow(transactionHistory.get(i).tabularize());
+            }
+        }
+    }
+
     private void Back(){
         mainApp.setFrame(App.FRAME.DASHBOARD);
     }

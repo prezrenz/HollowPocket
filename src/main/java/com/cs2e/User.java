@@ -67,7 +67,7 @@ public class User {
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
-        String[] split = data.split("|");
+        String[] split = data.split("\\|");
         String type = split[0];
         String to = split[1];
         String from = split[2];

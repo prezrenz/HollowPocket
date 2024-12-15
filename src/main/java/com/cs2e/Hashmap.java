@@ -58,9 +58,9 @@ public class Hashmap<T> {
         // should check if key is only number
 
         String extractedNumber = "";
-        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(1)));
-        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(3)));
-        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(5)));
+        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(0)));
+        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(2)));
+        extractedNumber = extractedNumber.concat(String.valueOf(key.charAt(4)));
 
         return Integer.parseInt(extractedNumber);
     }

@@ -90,7 +90,7 @@ public class Database {
     }
 
     User stringToUser(String data) {
-        String[] split = data.split("|");
+        String[] split = data.split("\\|");
 
         String accountId = split[0];
         String username = split[1];

@@ -242,6 +242,7 @@ public class DashBoard extends JFrame {
     }
 
     private void transactionHistory(){
+        mainApp.transactionHistory.setup();
         mainApp.setFrame(App.FRAME.TRANSACTION);
     }
 }
