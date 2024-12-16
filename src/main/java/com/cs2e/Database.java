@@ -96,7 +96,7 @@ public class Database {
         String username = split[1];
         String password = split[2];
         Float balance = Float.parseFloat(split[3]);
-        String country = split[4];
+        String country = split[4]; //HACK: for some reason theyre opposites
         String phoneNumber = split[5];
         
         User newUser = new User(accountId, username, password,

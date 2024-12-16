@@ -196,8 +196,8 @@ public class registration_page extends JFrame {
         try {
             String name = user_text_field.getText();
             String pass = passwordField.getText();
-            String country = countryField.getText();
-            String numb = PNumberTextField.getText();
+            String country = PNumberTextField.getText(); //HACK: theyre opposite for some reason
+            String numb = countryField.getText();
 
             if(name.isEmpty() || pass.isEmpty() || country.isEmpty() || numb.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.ERROR_MESSAGE);
